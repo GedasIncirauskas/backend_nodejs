@@ -8,8 +8,8 @@ const { dbConfig } = require('../../config.js');
 router.get('/bills/:id?', loggedIn, async (req, res) => {
   const id = req.params.id || '';
   const query = `
-  SELECT * FROM bills  
-  ${id && `WHERE group_id = '${req.params.id}'`}
+    SELECT * FROM bills  
+    ${id && `WHERE group_id = '${req.params.id}'`}
     `;
   try {
     const con = await mysql.createConnection(dbConfig);
@@ -30,8 +30,8 @@ router.post('/bills', loggedIn, async (req, res) => {
   try {
     const con = await mysql.createConnection(dbConfig);
     const query = `
-    INSERT INTO bills (group_id, amount, description)
-    VALUES (${mysql.escape(group_id)}, ${mysql.escape(amount)}, ${mysql.escape(description)})`;
+      INSERT INTO bills (group_id, amount, description)
+      VALUES (${mysql.escape(group_id)}, ${mysql.escape(amount)}, ${mysql.escape(description)})`;
     const [data] = await con.execute(query);
     await con.end();
     return res.send(data);

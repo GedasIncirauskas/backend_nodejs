@@ -26,8 +26,8 @@ router.post('/register', async (req, res) => {
   try {
     const con = await mysql.createConnection(dbConfig);
     const [data] = await con.execute(`
-    INSERT INTO users (full_name, email, password)
-    VALUES (${mysql.escape(userInput.full_name)}, ${mysql.escape(userInput.email)}, '${encryptedPassword}')`);
+      INSERT INTO users (full_name, email, password)
+      VALUES (${mysql.escape(userInput.full_name)}, ${mysql.escape(userInput.email)}, '${encryptedPassword}')`);
     await con.end();
     return res.send(data);
   } catch (err) {
@@ -47,7 +47,10 @@ router.post('/login', async (req, res) => {
 
   try {
     const con = await mysql.createConnection(dbConfig);
-    const [data] = await con.execute(`SELECT id, email, password FROM users WHERE email = ${mysql.escape(userInput.email)}`);
+    const [data] = await con.execute(`
+      SELECT id, email, password 
+      FROM users 
+      WHERE email = ${mysql.escape(userInput.email)}`);
     await con.end();
 
     const answer = bcrypt.compareSync(userInput.password, data[0].password);
