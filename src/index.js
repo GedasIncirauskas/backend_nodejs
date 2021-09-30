@@ -15,10 +15,6 @@ app.use('/v1/auth', auth);
 app.use('/v1/', bills);
 app.use('/v1/', accounts);
 
-app.send('/', (req, res) => {
-  return res.send('Server is run');
-});
-
 app.all('*', (req, res) => {
   return res.status(404).send({ msg: 'Page not found' });
 });
