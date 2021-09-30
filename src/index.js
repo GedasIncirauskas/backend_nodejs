@@ -1,11 +1,11 @@
 const express = require('express');
 const cors = require('cors');
-const { port } = require('./src/config.js');
-const logger = require('./logger.js');
+const { port } = require('./config.js');
+const logger = require('../logger.js');
 
-const auth = require('./src/routes/v1/auth.js');
-const bills = require('./src/routes/v1/bills.js');
-const accounts = require('./src/routes/v1/accounts.js');
+const auth = require('./routes/v1/auth.js');
+const bills = require('./routes/v1/bills.js');
+const accounts = require('./routes/v1/accounts.js');
 
 const app = express();
 app.use(express.json());
